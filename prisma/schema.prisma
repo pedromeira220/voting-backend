@@ -1,0 +1,37 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Voting {
+  id String @id @default(uuid())
+  name String
+
+  Option Option[]
+}
+
+model Option {
+  id String @id @default(uuid())
+  name String
+  votingId String
+  voting Voting @relation(fields: [votingId], references: [id])
+
+  Vote Vote[]
+}
+
+model Vote {
+  id String @id @default(uuid())
+  participantName String
+  optionId String
+  option Option @relation(fields: [optionId], references: [id])
+}

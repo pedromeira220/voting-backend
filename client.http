@@ -1,0 +1,22 @@
+# @name register_option
+
+POST http://localhost:3333/option
+Content-Type: application/json
+
+{
+  "name": "Bolsonaro - 22"
+}
+
+### 
+
+POST http://localhost:3333/vote/8f126718-fd1b-4483-983e-daef090fe2a9
+Content-Type: application/json
+
+{
+  "participantName": "Pedro"
+}
+
+###
+
+GET http://localhost:3333/voting/metrics
+Content-Type: application/json
